@@ -14,7 +14,7 @@ onMounted(() => {
     "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=20&tsym=USD";
   fetch(url)
     .then((respuesta) => respuesta.json())
-    .then((Data) => (criptomonedas.value = Data));
+    .then(({ Data }) => (criptomonedas.value = Data));
 });
 </script>
 
@@ -33,6 +33,21 @@ onMounted(() => {
             </option>
           </select>
         </div>
+
+        <div class="campo">
+          <label for="cripto">Criptomoneda:</label>
+          <select id="cripto">
+            <option value="">-- Selecciona --</option>
+            <option
+              v-for="criptomoneda in criptomonedas"
+              :value="criptomoneda.CoinInfo.Name"
+            >
+              {{ criptomoneda.CoinInfo.FullName }}
+            </option>
+          </select>
+        </div>
+
+        <input type="submit" value="Cotizar" />
       </form>
     </div>
   </div>
